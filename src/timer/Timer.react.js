@@ -89,7 +89,8 @@ class Timer extends Component {
                 dispatch(saveAndReset({
                   time: elapsed,
                   description: this.state.description,
-                  task: this.state.task
+                  task: this.state.task,
+                  dateFor: Date.now()
                 }));
                 this.setState({
                   description: '',

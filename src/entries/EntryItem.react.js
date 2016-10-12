@@ -1,15 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
 import { DELETE } from './entries.actions';
 
 import { formatElapsedTime } from '../utils';
 
 function EntryItem (props) {
-  const { id, task, description, dateFor, time, dispatch } = props;
-
-  const date = moment(dateFor);
+  const { id, task, description, time, dispatch } = props;
 
   return (
     <tr>
@@ -29,7 +26,7 @@ function EntryItem (props) {
         {description}
       </td>
       <td>
-        {formatElapsedTime(time)}
+        <pre>{formatElapsedTime(time)}</pre>
       </td>
     </tr>
   );
@@ -37,7 +34,6 @@ function EntryItem (props) {
 
 EntryItem.propTypes = {
   description: PropTypes.string,
-  dateFor: PropTypes.object,
   time: PropTypes.number
 };
 

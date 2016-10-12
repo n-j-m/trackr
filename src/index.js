@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { combineReducers, applyMiddleware } from 'redux';
+import persistState from 'redux-localstorage';
+
 import App from './App';
 import './index.css';
 import { timer } from './timer/timer';
@@ -14,9 +16,14 @@ const rootReducer = combineReducers({
   entries
 });
 
+const enhancer = compose(
+  applyMiddleware(thunk),
+  persistState(null, { key: 'trackr' })
+);
+
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk)
+  enhancer
 );
 
 ReactDOM.render(
