@@ -7,3 +7,5 @@ export function saveAndReset (payload) {
     dispatch({ type: RESET });
   };
 }
+
+export const CLEAR_ALL_DATA = 'CLEAR_ALL_DATA';

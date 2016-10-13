@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { exportToCSV } from '../utils';
 import EntryItem from './EntryItem.react';
 
 class EntryGroup extends Component {
@@ -18,6 +19,10 @@ class EntryGroup extends Component {
               <strong>
                 {dateFor}
               </strong>
+              <small className="pull-right">
+                <button className="btn btn-xs btn-default"
+                  onClick={() => exportToCSV(entries)}>Export</button>
+              </small>
             </div>
             <div className="panel-body">
               <table className="table table-stripped">

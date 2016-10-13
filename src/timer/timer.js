@@ -1,4 +1,5 @@
 import { RESET, START, STOP, TimerStatuses } from './timer.actions';
+import { CLEAR_ALL_DATA } from '../shared/actions';
 
 const initialTimerState = {
   status: TimerStatuses.STOPPED,
@@ -31,6 +32,8 @@ export function timer (state = initialTimerState, action) {
         status: TimerStatuses.STOPPED,
         description: undefined
       }
+    case CLEAR_ALL_DATA:
+      return Object.assign({}, initialTimerState);
     default:
       return state;
   }

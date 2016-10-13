@@ -26,3 +26,29 @@ export function formatElapsedTime (elapsed) {
 
   return `${zeroPad(duration.hours())}:${zeroPad(duration.minutes())}:${zeroPad(duration.seconds())}.${zeroPad(duration.milliseconds(), 3)}`;
 }
+
+export function exportToCSV (entries) {
+  let headerKeys = [];
+  const records = Object.keys(entries)
+    .reduce((arr, key) => {
+      if (!headerKeys.length) {
+        headerKeys = Object.keys(entries[key]);
+        arr.push(['id'].concat(headerKeys));
+      }
+
+      const record = [key];
+      for (let i = 0, l = headerKeys.length; i < l; ++i) {
+        const propKey = headerKeys[i];
+        const prop = entries[key][propKey];
+        record.push(prop);
+      }
+      arr.push(record);
+
+      return arr;
+    }, []);
+
+    const link = document.createElement('a');
+    link.href = 'data:application/csv;charset=utf-8,' + encodeURIComponent(records.join('\r\n'));
+    link.download = 'trackr.csv';
+    link.click();
+}

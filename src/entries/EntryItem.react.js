@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { DELETE } from './entries.actions';
+import { DELETE, EDIT } from './entries.actions';
 
 import { formatElapsedTime } from '../utils';
 
@@ -20,10 +20,24 @@ function EntryItem (props) {
         </button>
       </td>
       <td>
-        {task}
+        <input type="text" defaultValue={task}
+          className="form-control input-sm"
+          onInput={(ev) => dispatch({type: EDIT, payload: {
+            id,
+            entry: {
+              task: ev.target.value
+            }
+          }})} />
       </td>
       <td>
-        {description}
+        <input type="text" defaultValue={description}
+          className="form-control input-sm"
+          onInput={(ev) => dispatch({type: EDIT, payload: {
+            id,
+            entry: {
+              description: ev.target.value
+            }
+          }})} />
       </td>
       <td>
         <pre>{formatElapsedTime(time)}</pre>

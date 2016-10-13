@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import { CLEAR_ENTRIES } from './entries.actions';
 import EntryGroup from './EntryGroup.react';
 
 const entriesByDate = (entries) =>
@@ -16,7 +17,7 @@ const entriesByDate = (entries) =>
 
 class Entries extends Component {
   render () {
-    const { entries } = this.props;
+    const { entries, dispatch } = this.props;
 
     const groupedEntries = entriesByDate(entries);
 
@@ -28,6 +29,14 @@ class Entries extends Component {
 
     return (
       <div className="container-fluid">
+        <div className="row">
+          <div className="form-group col-xs-12">
+            <button className="btn btn-xs btn-danger pull-right"
+              onClick={() => dispatch({type: CLEAR_ENTRIES})}>
+              Clear
+            </button>
+          </div>
+        </div>
         {entryGroups}
       </div>
     );
